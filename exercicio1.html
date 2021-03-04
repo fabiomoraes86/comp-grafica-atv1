@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/three.min.js"></script>
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            overflow: hiden;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        //Definição de cena
+        var scene = new THREE.Scene();
+        
+        //Definição da câmera >>> PerspectiveCamera(fav,aspect,near,far)
+        var camera = new THREE.PerspectiveCamera(160,
+                                                window.innerWidth / window.innerHeight,
+                                                0.1, 1000
+        );
+
+        //Definição do renderizador
+        var renderer = new THREE.WebGLRenderer();
+
+        //Tamanho da viewport
+        renderer.setSize( window.innerWidth, window.innerHeight );
+
+        // Primeiro parametro é a cor em valor hexadecimal
+        // Segundo parametro é o valor do canal alpha
+        renderer.setClearColor( 0x000000, 1);
+
+        //Adicionamos um novo elemento em nossa página HTML atraves do JavaScript
+        document.body.appendChild( renderer.domElement );   
+        
+        //Definição do posicionamento da câmera
+        //(Podemos trabalhar os angulos x, y, z)
+        camera.position.z = 1;
+
+        //Renderização do cenário em função da câmera
+        renderer.render( scene, camera );
+
+        var triangleGeometry = new THREE.Geometry();
+
+        //Definição dos vertices
+        triangleGeometry.vertices.push( new THREE.Vector3(-3, -3, 0.0));//vertice 0
+        triangleGeometry.vertices.push( new THREE.Vector3(0.0, 0.0, 0.0));//vertice 1
+        triangleGeometry.vertices.push( new THREE.Vector3(3.0, -3.0, 0.0));//vertice 2
+
+        //Triangulo superior
+        triangleGeometry.vertices.push( new THREE.Vector3(-3.0, 3.0, 0.0));//vertice 3
+        triangleGeometry.vertices.push( new THREE.Vector3(3.0, 3.0, 0.0));//vertice 4
+
+        //Triangulo direito
+        triangleGeometry.vertices.push( new THREE.Vector3(6.0, 0.0, 0.0));//vertice 5
+
+        //Triangulo esquerdo
+        triangleGeometry.vertices.push( new THREE.Vector3(-6.0, 0.0, 0.0));//vertice 6
+
+        //Montagem das faces utilizando os vértices
+        triangleGeometry.faces.push( new THREE.Face3(0, 1, 2));
+        triangleGeometry.faces.push( new THREE.Face3(3, 4, 1));
+        triangleGeometry.faces.push( new THREE.Face3(4, 5, 2));
+        triangleGeometry.faces.push( new THREE.Face3(6, 3, 0));
+
+        //Definição de um material basico de cor vermelho com colorização em ambos os lados
+        var triangleMaterial = new THREE.MeshBasicMaterial({
+            color: 0xFE2E64,
+            wireframe: true ,
+            side:THREE.DoubleSide
+        });
+
+        var triangleMaterial2 = new THREE.MeshBasicMaterial({
+            color: 0xFE2E64,
+            wireframe: false ,
+            side:THREE.DoubleSide
+        });
+
+        //Definição da malha de poligonos
+        var triangleMesh = new THREE.Mesh(triangleGeometry, triangleMaterial);
+        var triangleMesh2 = new THREE.Mesh(triangleGeometry, triangleMaterial2);
+
+        //Definição da posição da geometria no cenário. Coordenadas x, y, z
+        triangleMesh.position.set(0.0, 0.0, 0.0);
+        
+        //Adição da geometria ao cenário
+        scene.add(triangleMesh);
+        scene.add(triangleMesh2);
+        triangleMesh.position.set(0.0, 0.0, 0.0);
+        triangleMesh2.position.set(0.0, 0.0, 0.0);
+        
+        //Definição do posicionamento da câmera
+        //(Podemos trabalhar os angulos x, y, z)
+        camera.position.z = 1;
+         //Renderização do cenário em função da câmera
+        renderer.render( scene, camera ); 
+
+    </script>
+</body>
+</html>
