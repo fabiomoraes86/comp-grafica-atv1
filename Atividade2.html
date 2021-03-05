@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <title>Atividade 1.2</title>
+        <meta charset="utf-8"/>
+        <meta name="author" content="Henrique Mariano"/>
+        <meta name="description" content="Atividade 1.2"/>
+        <meta name="keywords" content="THREE.js, Vertices, Faces"/>
+        <script src="js/three.min.js"></script>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            html, body{
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            //Definition scene
+            var scene = new THREE.Scene();
+
+            //Definition camera >>> PerspectiveCamera(fav,aspect,near,far)
+            var camera = new THREE.PerspectiveCamera(160, window.innerWidth / window.innerHeight, 0.1, 1000);
+            
+            //Definition renderer
+            var renderer = new THREE.WebGLRenderer();
+            
+            //Viewport size
+            renderer.setSize( window.innerWidth, window.innerHeight );
+
+            // First parameter is a color in hexadecimal value
+            // Second parameter is the alpha channel value
+            renderer.setClearColor( 0x000000, 1);
+
+            //We added a new element to our HTML page via JavaScript
+            document.body.appendChild( renderer.domElement );
+
+            var cubeGeometry = new THREE.Geometry();
+
+            cubeGeometry.vertices.push(new THREE.Vector3(0.0, 0.0, 0.0));
+            cubeGeometry.vertices.push(new THREE.Vector3(3.0, 0.0, 0.0));
+            cubeGeometry.vertices.push(new THREE.Vector3(3.0, 3.0, 0.0));
+            cubeGeometry.vertices.push(new THREE.Vector3(0.0, 3.0, 0.0));
+            cubeGeometry.vertices.push(new THREE.Vector3(0.0, 0.0, 0.3));
+            cubeGeometry.vertices.push(new THREE.Vector3(3.0, 0.0, 0.3));
+            cubeGeometry.vertices.push(new THREE.Vector3(3.0, 3.0, 0.3));
+            cubeGeometry.vertices.push(new THREE.Vector3(0.0, 3.0, 0.3));
+
+            // Assembly of the faces using the vertices
+            cubeGeometry.faces.push( new THREE.Face3(0, 1, 2));
+            cubeGeometry.faces.push( new THREE.Face3(0, 3, 2));
+            cubeGeometry.faces.push( new THREE.Face3(0, 1, 4));
+            cubeGeometry.faces.push( new THREE.Face3(4, 1, 5));
+            cubeGeometry.faces.push( new THREE.Face3(4, 3, 0));
+            cubeGeometry.faces.push( new THREE.Face3(2, 5, 1));
+            cubeGeometry.faces.push( new THREE.Face3(6, 2, 5));
+            cubeGeometry.faces.push( new THREE.Face3(3, 7, 4));
+            cubeGeometry.faces.push( new THREE.Face3(4, 7, 6));
+            cubeGeometry.faces.push( new THREE.Face3(4, 6, 5));
+            cubeGeometry.faces.push( new THREE.Face3(7, 3, 2));
+            cubeGeometry.faces.push( new THREE.Face3(7, 2, 6));
+         
+
+            var cubeMaterial = new THREE.MeshBasicMaterial({
+                color: 0xFE2E64,
+                wireframe: true,
+                side:THREE.DoubleSide
+            });
+
+            var cubeMesh = new THREE.Mesh(cubeGeometry, cubeMaterial);
+
+            cubeMesh.position.set(0.0, 0.0, 0.0);
+            scene.add(cubeMesh);
+            camera.position.z = 1;
+            camera.position.y = 2;
+            camera.position.x = 5;
+            renderer.render(scene, camera);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>USCS - Aula 4 - Introdução ao three.js</title>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Douglas Andre" />
+    <meta name="description" content="USCS - Three.js - Computação Gráfica" />
+    <meta name="keywords" content="THREE.js, HSBC Color" />
+    <script src="js/three.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./main.css" />
+  </head>
+  <body>
+    <script>
+      //Definition scene
+      var scene = new THREE.Scene();
+
+      //Definition camera >>> PerspectiveCamera(fav,aspect,near,far)
+      var camera = new THREE.PerspectiveCamera(
+        160,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+
+      //Definition renderer
+      var renderer = new THREE.WebGLRenderer();
+
+      //Viewport size
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      // First parameter is a color in hexadecimal value
+      // Second parameter is the alpha channel value
+      renderer.setClearColor(0x000000, 1);
+
+      //We added a new element to our HTML page via JavaScript
+      document.body.appendChild(renderer.domElement);
+
+      // Definition of camera positioning
+      // (We can work the angles x, y, z)
+      camera.position.z = 9;
+
+      //Definition geometry
+      var pictureColor = new THREE.Geometry();
+      //Definition of vertices
+      pictureColor.vertices.push(new THREE.Vector3(0, 0, 0.0)); //Vertice 0
+      pictureColor.vertices.push(new THREE.Vector3(20, 20, 0.0)); //Vertice 1
+      pictureColor.vertices.push(new THREE.Vector3(40, 0, 0.0)); //Vertice 2 
+      pictureColor.vertices.push(new THREE.Vector3(20, -20, 0.0)); //Vertice 3
+      pictureColor.vertices.push(new THREE.Vector3(-20, -20, 0.0)); //Vertice 4
+      pictureColor.vertices.push(new THREE.Vector3(-40, 0, 0.0)); //Vertice 5
+      pictureColor.vertices.push(new THREE.Vector3(-20, 20, 0.0)); //Vertice 6
+      pictureColor.faces.push(new THREE.Face3(0, 6, 1));
+      pictureColor.faces.push(new THREE.Face3(1, 2, 3));
+      pictureColor.faces.push(new THREE.Face3(0, 3, 4));
+      pictureColor.faces.push(new THREE.Face3(4, 5, 6));
+
+      pictureColor.faces[0].vertexColors[0]=new THREE.Color(0x00ff00);
+      pictureColor.faces[0].vertexColors[1]=new THREE.Color(0x00ff00);
+      pictureColor.faces[0].vertexColors[2]=new THREE.Color(0x00ff00);
+
+      pictureColor.faces[1].vertexColors[0]=new THREE.Color(0xFE2E64);
+      pictureColor.faces[1].vertexColors[1]=new THREE.Color(0xFE2E64);
+      pictureColor.faces[1].vertexColors[2]=new THREE.Color(0xFE2E64);
+
+      pictureColor.faces[2].vertexColors[0]=new THREE.Color(0x00ff00);
+      pictureColor.faces[2].vertexColors[1]=new THREE.Color(0x0000ff);
+      pictureColor.faces[2].vertexColors[2]=new THREE.Color(0xFE2E64);
+      
+      //red color material
+      var pictureColorMaterial = new THREE.MeshBasicMaterial({
+        vertexColors:THREE.VertexColors,
+        side:THREE.DoubleSide
+      });
+
+      // Definition of the polygon mesh
+      var pictureColorMesh = new THREE.Mesh(pictureColor, pictureColorMaterial);
+
+      // Definition of the position of the geometry in the scenario. X, y, z coordinates
+      pictureColorMesh.position.set(0.0, 0.0, 0.0);
+
+      // Adding geometry to the stage
+      scene.add(pictureColorMesh);
+      
+      renderer.render(scene, camera);      
+    </script>
+  </body>
+</html>
