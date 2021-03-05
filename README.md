@@ -1,1 +1,0 @@
-# comp-grafica-atv1
