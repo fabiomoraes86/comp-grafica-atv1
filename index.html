@@ -54,18 +54,24 @@
         triangleGeometry.vertices.push( new THREE.Vector3(0.5, 0.5, 0.0));
         //triangleGeometry.vertices.push( new THREE.Vector3(0.5, -2.5, 0.0));
         triangleGeometry.vertices.push( new THREE.Vector3(3.5, -2.5, 0.0));
+ 
+        triangleGeometry.vertices.push( new THREE.Vector3(-2.5, -2.5, 0.0));
+        triangleGeometry.vertices.push( new THREE.Vector3(0.5, 0.5, 0.0));
+        //triangleGeometry.vertices.push( new THREE.Vector3(0.5, -2.5, 0.0));
+        triangleGeometry.vertices.push( new THREE.Vector3(3.5, -2.5, 0.0));
 
         //Montagem das faces utilizando os vértices
         triangleGeometry.faces.push(new THREE.Face3(0, 1, 2));
+        triangleGeometry.faces.push(new THREE.Face3(3, 4, 5));
         //triangleGeometry.faces.push(new THREE.Face3(1, 2, 0));
 
         //Definição de um material basico de cor vermelho com colorização em ambos os lados
         var triangleMaterial = new THREE.MeshBasicMaterial({
             color: 0xFE2E64,
-            wireframe: true ,
+            wireframe: false ,
             side:THREE.DoubleSide
         });
-
+        
         var triangleMaterial2 = new THREE.MeshBasicMaterial({
             color: 0xFE2E64,
             wireframe: false ,
@@ -76,15 +82,13 @@
         var triangleMesh = new THREE.Mesh(triangleGeometry, triangleMaterial);
         var triangleMesh2 = new THREE.Mesh(triangleGeometry, triangleMaterial2);
 
-        //Definição da posição da geometria no cenário. Coordenadas x, y, z
-        triangleMesh.position.set(0.0, 0.0, 0.0);
-        
-        //Adição da geometria ao cenário
-        scene.add(triangleMesh);
-        scene.add(triangleMesh2);
-        triangleMesh.position.set(0.0, 0.0, 0.0);
-        triangleMesh2.position.set(0.0, 0.0, 0.0);
-        
+        triangleMesh.position.set(-6.0, 0.0, 0.0);
+        triangleMesh2.position.set(6.0, 0.0, 0.0);
+
+         //Adição da geometria ao cenário
+         scene.add(triangleMesh);
+         scene.add(triangleMesh2);
+
         //Definição do posicionamento da câmera
         //(Podemos trabalhar os angulos x, y, z)
         camera.position.z = 1;

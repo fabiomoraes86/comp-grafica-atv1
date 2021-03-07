@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <title>Atividade 1.2</title>
+        <meta charset="utf-8"/>
+        <meta name="description" content="Atividade 1.2"/>
+        <meta name="keywords" content="THREE.js, Vertices, Faces"/>
+        <script src="js/three.min.js"></script>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            html, body{
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            //Definition scene
+            var scene = new THREE.Scene();
+
+            //Definition camera >>> PerspectiveCamera(fav,aspect,near,far)
+            var camera = new THREE.PerspectiveCamera(160, window.innerWidth / window.innerHeight, 0.1, 1000);
+            
+            //Definition renderer
+            var renderer = new THREE.WebGLRenderer();
+            
+            //Viewport size
+            renderer.setSize( window.innerWidth, window.innerHeight );
+
+            // First parameter is a color in hexadecimal value
+            // Second parameter is the alpha channel value
+            renderer.setClearColor( 0x000000, 1);
+
+            //We added a new element to our HTML page via JavaScript
+            document.body.appendChild( renderer.domElement );
+
+            var triangleGeometry = new THREE.Geometry();
+
+            //vertex1
+            triangleGeometry.vertices.push(new THREE.Vector3(4.1, 8.0, 0.0)); //0
+            triangleGeometry.vertices.push(new THREE.Vector3(4.1, 5.5, 0.0)); //1
+            triangleGeometry.vertices.push(new THREE.Vector3(5.1, 5.0, 0.0)); //2
+            triangleGeometry.vertices.push(new THREE.Vector3(0.0, 0.0, 0.0)); //3
+
+            //vertex2
+            triangleGeometry.vertices.push(new THREE.Vector3(6.5, 1.5, 0.0)); //4
+            triangleGeometry.vertices.push(new THREE.Vector3(4.3, 8.0, 0.0)); //5
+            triangleGeometry.vertices.push(new THREE.Vector3(10.0, 0.0, 0.0));//6
+            triangleGeometry.vertices.push(new THREE.Vector3(7.0, 2.8, 0.0)); //7
+
+            //vertex3
+            triangleGeometry.vertices.push(new THREE.Vector3(3.0, 0.9, 0)); //8
+            triangleGeometry.vertices.push(new THREE.Vector3(5.3, 1.8, 0)); //9
+            triangleGeometry.vertices.push(new THREE.Vector3(9.5, 0.0, 0)); //10
+            triangleGeometry.vertices.push(new THREE.Vector3(6.5, 0.8, 0)); //11
+
+            //vertex4
+            triangleGeometry.vertices.push(new THREE.Vector3(2.17, 1.8, 0)); //12
+            triangleGeometry.vertices.push(new THREE.Vector3(0.22, 0, 0)); //13
+            triangleGeometry.vertices.push(new THREE.Vector3(4.8, 1.8, 0)); //14
+            triangleGeometry.vertices.push(new THREE.Vector3(2.5, 1.3, 0)); //15
+
+
+            // Assembly of the faces using the vertice 1 left
+            triangleGeometry.faces.push( new THREE.Face3(0, 1, 2));
+            triangleGeometry.faces.push( new THREE.Face3(2, 3, 0));
+            triangleGeometry.faces.push( new THREE.Face3(2, 3, 1));
+
+            // Assembly of the faces using the vertice 2 right
+            triangleGeometry.faces.push( new THREE.Face3(4, 5, 6));
+            triangleGeometry.faces.push( new THREE.Face3(6, 7, 4));
+            triangleGeometry.faces.push( new THREE.Face3(6, 7, 5));
+
+            // Assembly of the faces using the vertice 3 right down 
+            triangleGeometry.faces.push( new THREE.Face3(8, 9, 10));
+            triangleGeometry.faces.push( new THREE.Face3(8, 11, 10));
+            triangleGeometry.faces.push( new THREE.Face3(9, 11, 10));
+
+            // Assembly of the faces using the vertice 3 left down 
+            triangleGeometry.faces.push( new THREE.Face3(12, 13, 14));
+            triangleGeometry.faces.push( new THREE.Face3(12, 15, 13));
+            triangleGeometry.faces.push( new THREE.Face3(13, 15, 14));
+            
+            triangleGeometry.faces[0].vertexColors[0] = new THREE.Color(0xBC0B27);
+            triangleGeometry.faces[0].vertexColors[1] = new THREE.Color(0xBC0B27);
+            triangleGeometry.faces[0].vertexColors[2] = new THREE.Color(0xBC0B27);
+
+            triangleGeometry.faces[1].vertexColors[0] = new THREE.Color(0xE00120);
+            triangleGeometry.faces[1].vertexColors[1] = new THREE.Color(0xE00120);
+            triangleGeometry.faces[1].vertexColors[2] = new THREE.Color(0xE00120);
+
+            triangleGeometry.faces[2].vertexColors[0] = new THREE.Color(0xBC0B27);
+            triangleGeometry.faces[2].vertexColors[1] = new THREE.Color(0xBC0B27);
+            triangleGeometry.faces[2].vertexColors[2] = new THREE.Color(0xBC0B27);
+
+            triangleGeometry.faces[3].vertexColors[0] = new THREE.Color(0x029be5);
+            triangleGeometry.faces[3].vertexColors[1] = new THREE.Color(0x029be5);
+            triangleGeometry.faces[3].vertexColors[2] = new THREE.Color(0x029be5);
+
+            triangleGeometry.faces[4].vertexColors[0] = new THREE.Color(0x266FB4);
+            triangleGeometry.faces[4].vertexColors[1] = new THREE.Color(0x266FB4);
+            triangleGeometry.faces[4].vertexColors[2] = new THREE.Color(0x266FB4);
+
+            triangleGeometry.faces[5].vertexColors[0] = new THREE.Color(0xBCE2F9);
+            triangleGeometry.faces[5].vertexColors[1] = new THREE.Color(0xBCE2F9);
+            triangleGeometry.faces[5].vertexColors[2] = new THREE.Color(0xBCE2F9);
+
+            triangleGeometry.faces[6].vertexColors[0] = new THREE.Color(0x086737);
+            triangleGeometry.faces[6].vertexColors[1] = new THREE.Color(0x086737);
+            triangleGeometry.faces[6].vertexColors[2] = new THREE.Color(0x086737);
+
+            triangleGeometry.faces[7].vertexColors[0] = new THREE.Color(0x049649);
+            triangleGeometry.faces[7].vertexColors[1] = new THREE.Color(0x049649);
+            triangleGeometry.faces[7].vertexColors[2] = new THREE.Color(0x049649);
+
+            triangleGeometry.faces[8].vertexColors[0] = new THREE.Color(0x93C439);
+            triangleGeometry.faces[8].vertexColors[1] = new THREE.Color(0x93C439);
+            triangleGeometry.faces[8].vertexColors[2] = new THREE.Color(0x93C439);
+
+            triangleGeometry.faces[9].vertexColors[0] = new THREE.Color(0xFFF8C5);
+            triangleGeometry.faces[9].vertexColors[1] = new THREE.Color(0xFFF8C5);
+            triangleGeometry.faces[9].vertexColors[2] = new THREE.Color(0xFFF8C5);
+
+            triangleGeometry.faces[10].vertexColors[0] = new THREE.Color(0xF5B144);
+            triangleGeometry.faces[10].vertexColors[1] = new THREE.Color(0xF5B144);
+            triangleGeometry.faces[10].vertexColors[2] = new THREE.Color(0xF5B144);
+            
+            triangleGeometry.faces[11].vertexColors[0] = new THREE.Color(0xFFF116);
+            triangleGeometry.faces[11].vertexColors[1] = new THREE.Color(0xFFF116);
+            triangleGeometry.faces[11].vertexColors[2] = new THREE.Color(0xFFF116);
+
+            var triangleMaterial = new THREE.MeshBasicMaterial({
+                vertexColors:THREE.VertexColors,
+                side:THREE.DoubleSide
+            });
+
+            var triangleMaterial2 = new THREE.MeshBasicMaterial({
+                color: 0xFE2E64,
+                wireframe: true,
+                side:THREE.DoubleSide
+            });
+
+            var triangleMesh = new THREE.Mesh(triangleGeometry, triangleMaterial);
+            var triangleMesh2 = new THREE.Mesh(triangleGeometry, triangleMaterial2);
+
+            triangleMesh.position.set(1.5, 0.0, 0.0);
+            triangleMesh2.position.set(-13.5, 0.0, 0.0);
+
+            //Add geometry to scene
+            scene.add(triangleMesh);
+            scene.add(triangleMesh2);
+            
+            camera.position.z = 2;
+            //camera.position.y = 2;
+            camera.position.x = 0;
+            renderer.render(scene, camera);
+        </script>
+    </body>
+</html>
